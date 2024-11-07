@@ -1,0 +1,62 @@
+*{
+    margin: 0;
+}
+
+html, body {
+    font-family: "Arial", sans-serif;
+    font-weight: bold;
+}
+
+nav a {
+    color: #333;
+    font-size: 25px;
+    text-decoration: none;
+    padding: 20px;
+    margin: 10px;
+}
+
+nav {
+    padding: 30px;
+    text-align: right;
+}
+
+nav a:hover {
+    background-color: rgba(63, 197, 131, 0.76);
+    color: #fff;
+}
+
+.head{
+    display: block;
+    background-image: url("img/fon.png");
+    background-repeat: no-repeat;
+    background-position: right;
+    height: 751px;
+}
+.info{
+    background-image: url("img/Rec.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 100px;
+    text-align: center;
+
+}
+
+
+.img{
+    display: inline-block;
+}
+.catalog{
+    display: inline-block;
+    width: 70%;
+    text-align: right;
+}
+
+.catalog p{
+    text-align: right;
+}
+footer {
+    color: #333;
+    padding: 40px;
+    margin-top: 50px;
+    text-align: center;
+}
