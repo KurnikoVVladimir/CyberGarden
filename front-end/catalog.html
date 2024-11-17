@@ -7,34 +7,93 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Зоомагазин</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+        async function fetchDogs() {
+            try {
+                // Отправка GET-запроса на сервер
+                const response = await fetch('http://26.244.144.230:8000/dogs/', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                // Проверка успешности запроса
+                if (!response.ok) {
+                    throw new Error('Ошибка получения данных: ' + response.statusText);
+                }
+
+                // Получение JSON-ответа
+                const dogs = await response.json();
+
+                // Очистка контейнера для вывода данных
+                const dogList = document.getElementById('info');
+                dogList.innerHTML = '';
+
+                // Вывод данных о собаках
+                dogs.forEach(dog => {
+                    // Создание контейнера для собаки
+                    const dogBlock = document.createElement('div');
+                    dogBlock.className = 'card';
+
+                    // Создание блока для имени
+                    const dogName = document.createElement('p');
+                    dogName.className = 'dog-name';
+                    dogName.textContent = `Имя: ${dog.name}`;
+
+                    // Создание блока для цены
+                    const dogPrice = document.createElement('p');
+                    dogPrice.className = 'dog-price';
+                    dogPrice.textContent = `Цена: ${dog.price} ₽`;
+
+                    const dogImage = document.createElement('img');
+                    dogImage.className = 'dog-image';
+                    dogImage.src = "img/image2.png";
+
+                    const dogBuy = document.createElement('button');
+                    dogBuy.className = 'card'
+                    dogBuy.textContent = `Купить`
+                    dogBuy.onclick = () => {
+                        // Переход на новую страницу
+                        window.location.href = `dog/${dog.id}`;
+                    };
+
+
+                    // Добавление имени и цены в контейнер собаки
+                    dogBlock.appendChild(dogImage);
+                    dogBlock.appendChild(dogPrice);
+                    dogBlock.appendChild(dogName);
+                    dogBlock.appendChild(dogBuy)
+
+                    // Добавление контейнера собаки в список
+                    dogList.appendChild(dogBlock);
+                });
+            } catch (error) {
+                console.error('Произошла ошибка:', error);
+                alert('Не удалось загрузить данные о собаках.');
+            }
+        }
+
+        // Загрузка данных при открытии страницы
+        document.addEventListener('DOMContentLoaded', fetchDogs);
+    </script>
 </head>
 <body>
 <div class="head">
     <nav>
-        <a href="#">О нас</a>
         <a href="home.html">Главная</a>
-        <a href="#">Каталог</a>
+        <a href="sldg.html">Создать объявление</a>
+        <a href="catalog.html">Каталог</a>
     </nav>
     <div class="img">
         <img src="img/text.png" alt="" style="position: relative; bottom: 150px; left: 200px">
     </div>
     <img src="img/image2.png" alt="" style="position: relative; top: 270px; left: 600px">
 </div>
-<div class="info">
-    <div class="catalog">
-        <script></script>
-        <a href="cat.html"><img src="img/Rectangle.png" alt=""></a>
-        <p>Кот 1</p>
-        <a href="cat.html"><img src="img/Rectangle.png" alt=""></a>
-        <p>Кот 2</p>
-        <a href="cat.html"><img src="img/Rectangle.png" alt=""></a>
-        <p>Собака 1</p>
-        <a href="cat.html"><img src="img/Rectangle.png" alt=""></a>
-        <p>Собака 2</p>
-    </div>
-    <footer>
-        @ Все права защищены. 2024
-    </footer>
+<div class="info" id="info">
 </div>
+<footer>
+    @ Все права защищены. 2024
+</footer>
 </body>
 </html>

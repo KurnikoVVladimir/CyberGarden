@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Собака</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        async function getDogInfo(dogId) {
+            try {
+                // Запрос данных о собаке по ID
+                const response = await fetch(`http://26.244.144.230:8000/dogs/${dogId}/`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                // Проверка успешного запроса
+                if (!response.ok) {
+                    throw new Error('Ошибка запроса: ' + response.statusText);
+                }
+
+                const data = await response.json();
+
+                // Заполнение полей на странице
+                document.getElementById('dog-name').innerText = `Имя: ${data.name}`;
+                document.getElementById('dog-age').innerText = `Возраст: ${data.age}`;
+                document.getElementById('dog-species').innerText = `Порода: ${data.species}`;
+                document.getElementById('dog-price').innerText = `Цена: ${data.price} ₽`;
+            } catch (error) {
+                console.error('Произошла ошибка:', error);
+                alert('Не удалось загрузить данные о собаке.');
+            }
+        }
+
+        // Вызов функции при загрузке страницы (пример: ID = 1)
+        document.addEventListener('DOMContentLoaded', () => {
+            getDogInfo(1);
+        });
+    </script>
+
+</head>
+<body>
+<div class="info">
+    <p id="dog-name">Имя: </p>
+    <p id="dog-age">Возраст: </p>
+    <p id="dog-species">Порода: </p>
+    <p id="dog-price">Цена: </p>
+    <button onclick="alert('Вы приобрели собаку!')">Купить</button>
+</div>
+</body>
+</html>

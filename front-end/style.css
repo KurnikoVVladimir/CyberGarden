@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
 }
 
@@ -25,14 +25,15 @@ nav a:hover {
     color: #fff;
 }
 
-.head{
+.head {
     display: block;
     background-image: url("img/fon.png");
     background-repeat: no-repeat;
     background-position: right;
     height: 751px;
 }
-.info{
+
+.info {
     background-image: url("img/Rec.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -41,22 +42,62 @@ nav a:hover {
 
 }
 
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+}
 
-.img{
+.price {
+    color: grey;
+    font-size: 22px;
+}
+
+.card button {
+    border: none;
+    outline: 0;
+    padding: 50px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+.card button:hover {
+    opacity: 0.7;
+}
+
+.dog-price {
+
+}
+
+.dog-name {
+
+}
+
+.img {
     display: inline-block;
 }
-.catalog{
+.dog-image{
+    width: 300px;
+}
+.catalog {
     display: inline-block;
     width: 70%;
     text-align: right;
 }
 
-.catalog p{
+.catalog p {
     text-align: right;
 }
+
 footer {
     color: #333;
-    padding: 40px;
-    margin-top: 50px;
+    padding: 20px;
+    margin-top: 20px;
     text-align: center;
 }

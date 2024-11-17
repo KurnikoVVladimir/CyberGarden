@@ -11,10 +11,8 @@ from schemas import Dog, DogCreate
 from fastapi import FastAPI, APIRouter
 from pydantic import BaseModel
 
-
 app = FastAPI(title='Keber_PES')
 router = APIRouter()
-
 
 
 @router.get(
@@ -23,8 +21,8 @@ router = APIRouter()
     description="Собака по айди",
 )
 async def get_dog_by_id(
-    dog_id: int,
-    session: AsyncSession = Depends(db_manager.session_dependency),
+        dog_id: int,
+        session: AsyncSession = Depends(db_manager.session_dependency),
 ):
     return await services.get_dog_by_id(session=session, dog_id=dog_id)
 
@@ -35,12 +33,13 @@ async def get_dog_by_id(
     description="Создать Собаку",
 )
 async def create_dog(
-    dog_create: DogCreate,
-    session: AsyncSession = Depends(db_manager.session_dependency),
+        dog_create: DogCreate,
+        session: AsyncSession = Depends(db_manager.session_dependency),
 ):
     return await services.create_dog(
         session=session, dog_create=dog_create
     )
+
 
 @router.get(
     path="/dogs/",
@@ -48,9 +47,10 @@ async def create_dog(
     description="Все Собаки",
 )
 async def get_dogs(
-    session: AsyncSession = Depends(db_manager.session_dependency)
+        session: AsyncSession = Depends(db_manager.session_dependency)
 ):
     return await services.get_all_dogs(session)
+
 
 @router.delete(
     path="/dogs/",
@@ -58,13 +58,11 @@ async def get_dogs(
     description='Vova SOsi'
 )
 async def delete_dog(
-    dog_id: int,
-    session: AsyncSession = Depends(db_manager.session_dependency)
+        dog_id: int,
+        session: AsyncSession = Depends(db_manager.session_dependency)
 ):
-    dog = await services.get_dog_by_id(session,dog_id)
-    return await services.delete_dog(session,dog)
-
-
+    dog = await services.get_dog_by_id(session, dog_id)
+    return await services.delete_dog(session, dog)
 
 
 app.include_router(router)

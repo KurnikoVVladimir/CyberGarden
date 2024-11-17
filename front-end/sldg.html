@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создание собаки</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        async function createDog(event) {
+            event.preventDefault(); // Предотвращение перезагрузки страницы
+
+            // Получение данных из формы
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const species = document.getElementById('species').value;
+            const price = document.getElementById('price').value;
+
+            // Создание объекта с данными
+            const dogData = {
+                name: name,
+                age: parseInt(age), // Преобразование возраста в число
+                species: species,
+                price: parseFloat(price) // Преобразование цены в число с плавающей точкой
+            };
+
+            try {
+                // Отправка POST-запроса на сервер
+                const response = await fetch('http://26.244.144.230:8000/dogs/', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dogData) // Преобразование объекта в JSON
+                });
+
+                // Проверка ответа
+                if (response.ok) {
+                    const result = await response.json();
+                    alert(`Собака успешно создана! ID: ${result.id}`);
+                } else {
+                    const error = await response.json();
+                    alert(`Ошибка: ${error.detail}`);
+                }
+            } catch (error) {
+                console.error('Произошла ошибка:', error);
+                alert('Не удалось создать собаку. Проверьте соединение с сервером.');
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="head">
+    <nav>
+        <a href="home.html">Главная</a>
+        <a href="sldg.html">Создать объявление</a>
+        <a href="catalog.html">Каталог</a>
+    </nav>
+    <div class="img">
+        <img src="img/text.png" alt="" style="position: relative; bottom: 150px; left: 200px">
+    </div>
+    <img src="img/image2.png" alt="" style="position: relative; top: 270px; left: 600px">
+</div>
+<div class="info">
+    <h1>Создать собаку</h1>
+    <form id="dog-form" onsubmit="createDog(event)">
+        <label for="name">Имя:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="age">Возраст:</label><br>
+        <input type="number" id="age" name="age" required><br><br>
+
+        <label for="species">Порода:</label><br>
+        <input type="text" id="species" name="species" required><br><br>
+
+        <label for="price">Цена:</label><br>
+        <input type="number" id="price" name="price" step="0.01" required><br><br>
+
+        <button type="submit">Создать собаку</button>
+    </form>
+</div>
+<footer>
+        @ Все права защищены. 2024
+    </footer>
+</body>
+</html>
